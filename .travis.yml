@@ -1,0 +1,59 @@
+dist: trusty
+sudo: required
+
+language: node_js
+
+env:
+  global:
+    - DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - node_js: "7"
+    - env: NODE_SCRIPT="tests/run_e2e.js --nightly --ng4"
+  include:
+    - node_js: "6"
+      os: linux
+      env: SCRIPT=lint
+    - node_js: "6"
+      os: linux
+      env: SCRIPT=build
+    - node_js: "6"
+      os: linux
+      env: SCRIPT=test
+    - node_js: "6"
+      os: linux
+      env: NODE_SCRIPT="tests/run_e2e.js --glob=tests/build/**"
+    - node_js: "6"
+      os: linux
+      env: NODE_SCRIPT="tests/run_e2e.js --eject --glob=tests/build/**"
+    - node_js: "6"
+      os: linux
+      env: NODE_SCRIPT="tests/run_e2e.js --ignore=**/tests/build/**"
+    - node_js: "6"
+      os: linux
+      env: NODE_SCRIPT="tests/run_e2e.js --ng4 --glob=tests/build/**"
+    - node_js: "6"
+      os: linux
+      env: NODE_SCRIPT="tests/run_e2e.js --ng4 --ignore=**/tests/build/**"
+
+    # Optional builds.
+    - node_js: "6"
+      os: linux
+      env: NODE_SCRIPT="tests/run_e2e.js --nightly --ng4"
+    - node_js: "7"
+      os: linux
+      env: NODE_SCRIPT=tests/run_e2e.js
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CHROME_BIN=chromium-browser; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo "--no-sandbox" > ~/.config/chromium-flags.conf; fi
+  - yarn config set spin false
+  - yarn config set progress false
+
+script:
+  - if [[ "$SCRIPT" ]]; then npm run-script $SCRIPT; fi
+  - if [[ "$NODE_SCRIPT" ]]; then node $NODE_SCRIPT; fi
