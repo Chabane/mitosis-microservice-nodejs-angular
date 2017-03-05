@@ -1,4 +1,4 @@
-FROM boron-alpine
+FROM node:boron
 
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -9,7 +9,7 @@ COPY package.json /usr/src/app/
 RUN npm install
 
 # Bundle app source
-COPY . /usr/src/app
+COPY dist /usr/src/app
 
 EXPOSE 80
 CMD [ "npm", "start" ]
