@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/mitosis');
+mongoose.connect('mongodb://mongo:27017/mitosis');
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
