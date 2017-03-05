@@ -14,4 +14,4 @@ COPY dist /usr/src/app
 COPY src/server /usr/src/app/src
 
 EXPOSE 80
-CMD [ "npm", "start" ]
+CMD [ "npm", "start:prod" ]
