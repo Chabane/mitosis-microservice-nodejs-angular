@@ -1,9 +1,11 @@
-var express = require('express');
-var path = require('path');
-var morgan = require('morgan'); // logger
-var bodyParser = require('body-parser');
+'use strict';
 
-var app = express();
+const express = require('express');
+const path = require('path');
+const morgan = require('morgan'); // logger
+const bodyParser = require('body-parser');
+
+const app = express();
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(__dirname + '/../../dist'));
@@ -13,9 +15,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(morgan('dev'));
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.connect('mongodb://mongo:27017/mitosis');
-var db = mongoose.connection;
+const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
 
