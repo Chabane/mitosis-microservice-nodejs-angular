@@ -13,7 +13,5 @@ RUN yarn
 ADD dist /usr/src/app
 ADD src/server /usr/src/app/
 
-RUN ls
-
 EXPOSE 80
 CMD [ "npm", "run", "start:prod" ]
