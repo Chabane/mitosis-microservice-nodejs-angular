@@ -10,6 +10,7 @@ RUN npm install
 
 # Bundle app source
 COPY dist /usr/src/app
+COPY src/server /usr/src/app/src
 
 EXPOSE 80
 CMD [ "npm", "start" ]
