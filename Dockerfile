@@ -10,8 +10,8 @@ COPY yarn.lock /usr/src/app/
 RUN yarn
 
 # Bundle app source
-ADD dist /usr/src/app
-ADD src/server /usr/src/app/
+ADD dist /usr/src/app/dist/
+ADD src/server /usr/src/app/server/
 
-EXPOSE 80
+EXPOSE 3000
 CMD [ "npm", "run", "start:prod" ]
