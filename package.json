@@ -4,9 +4,9 @@
   "license": "Apache-2.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng build -w && nodemon src/server/app.js",
+    "start": "ng build -w && nodemon server/app.js",
     "start:prod": "node server/app.js",
-    "prod": "ng build -prod && node src/server/app.js",
+    "prod": "ng build -prod && node server/app.js",
     "build": "ng build",
     "build:prod": "ng build -prod",
     "test": "ng test --watch=false --browsers Chrome",
