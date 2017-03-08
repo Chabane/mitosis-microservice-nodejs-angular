@@ -1,7 +1,9 @@
 FROM node:boron
 
 # Create app directory
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app/dist
+RUN mkdir -p /usr/src/app/server
+
 WORKDIR /usr/src/app
 
 # Install app dependencies
