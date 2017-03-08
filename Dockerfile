@@ -13,7 +13,7 @@ RUN yarn
 
 # Bundle app source
 ADD dist /usr/src/app/dist/
-ADD src/server /usr/src/app/server/
+ADD server /usr/src/app/server/
 
 EXPOSE 3000
 CMD [ "npm", "run", "start:prod" ]
