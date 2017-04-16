@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng build -w && nodemon server/app.js",
+    "start": "ng build && nodemon server/app.js",
     "start:prod": "node server/app.js",
     "prod": "ng build -prod && node server/app.js",
     "build": "ng build",
@@ -14,7 +14,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/common": "4.0.0",
     "@angular/compiler": "4.0.0",
@@ -24,7 +24,9 @@
     "@angular/material": "2.0.0-beta.3",
     "@angular/platform-browser": "4.0.0",
     "@angular/platform-browser-dynamic": "4.0.0",
-    "@angular/router": "3.4.0",
+    "@angular/router": "4.0.0",
+    "@ngrx/core": "1.2.0",
+    "@ngrx/store": "2.2.1",
     "axios": "0.15.3",
     "body-parser": "1.16.1",
     "core-js": "2.4.1",
