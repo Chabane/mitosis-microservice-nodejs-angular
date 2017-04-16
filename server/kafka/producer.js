@@ -1,4 +1,8 @@
-var kafka = require('..');
+'use strict';
+
+const kafka = require('kafka-node');
+const winston = require('winston');
+
 var Producer = kafka.Producer;
 var KeyedMessage = kafka.KeyedMessage;
 var Client = kafka.Client;
@@ -16,11 +20,11 @@ producer.on('ready', function () {
   producer.send([
     { topic: topic, partition: p, messages: [message, keyedMessage], attributes: a }
   ], function (err, result) {
-    console.log(err || result);
+    winston.log(err || result);
     process.exit();
   });
 });
 
 producer.on('error', function (err) {
-  console.log('error', err);
+  winston.log('error', err);
 });

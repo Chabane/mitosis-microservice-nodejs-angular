@@ -1,10 +1,12 @@
 'use strict';
 
-var kafka = require('..');
+const kafka = require('kafka-node');
+const winston = require('winston');
+
 var Consumer = kafka.Consumer;
 var Offset = kafka.Offset;
 var Client = kafka.Client;
-var argv = require('optimist').argv;
+const argv = require('optimist').argv;
 var topic = argv.topic || 'topic-mitosis';
 
 var client = new Client('zookeeper:2181');
@@ -18,11 +20,11 @@ var consumer = new Consumer(client, topics, options);
 var offset = new Offset(client);
 
 consumer.on('message', function (message) {
-  console.log(message);
+  winston.debug(message);
 });
 
 consumer.on('error', function (err) {
-  console.log('error', err);
+  winston.info('error yoh', err);
 });
 
 /*
@@ -32,7 +34,7 @@ consumer.on('offsetOutOfRange', function (topic) {
   topic.maxNum = 2;
   offset.fetch([topic], function (err, offsets) {
     if (err) {
-      return console.error(err);
+      return winston.error(err);
     }
     var min = Math.min(offsets[topic.topic][topic.partition]);
     consumer.setOffset(topic.topic, topic.partition, min);
