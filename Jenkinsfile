@@ -19,12 +19,12 @@ node {
                             }
 
                             stage ('deploy'){
-                                sh 'docker build -t mitosis/microservice-nodejs:1 .'
+                                sh 'docker build -t mitosis/microservice-nodejs .'
                                 if (retstat != 1) {
-                                  // sh 'docker service update --replicas 2 --image mitosis/microservice-nodejs:1 microservice-nodejs'
+                                  // sh 'docker service update --replicas 2 --image mitosis/microservice-nodejs microservice-nodejs'
                                   sh 'docker service rm microservice-nodejs'
                                 }
-                                sh 'docker service create --name microservice-nodejs --publish 9992:3000 --network microservices-net --replicas 2 mitosis/microservice-nodejs:1'
+                                sh 'docker service create --name microservice-nodejs --publish 9992:3000 --network microservices-net --replicas 2 mitosis/microservice-nodejs'
                             }
                      }
                  }
