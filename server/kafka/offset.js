@@ -8,14 +8,14 @@ var topic = 'topic-mitosis';
 
 // Fetch available offsets
 offset.fetch([
-  { topic: topic, partition: 0, maxNum: 2 }
+  { topic: topic, partition: 1, maxNum: 2 }
 ], function (err, offsets) {
   console.log(err || offsets);
 });
 
 // Fetch commited offset
 offset.commit('kafka-node-group', [
-  { topic: topic, partition: 0 }
+  { topic: topic, partition: 1 }
 ], function (err, result) {
   console.log(err || result);
 });

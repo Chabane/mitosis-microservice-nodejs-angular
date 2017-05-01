@@ -6,9 +6,9 @@ var Offset = kafka.Offset;
 var Client = kafka.Client;
 var topic = 'topic-mitosis';
 
-var client = new Client('192.168.0.32:2181');
+var client = new Client('zookeeper:2181');
 var topics = [
-  {topic: topic, partition: 0}
+  {topic: topic, partition: 1}
 ];
 var options = { autoCommit: false, fetchMaxWaitMs: 1000, fetchMaxBytes: 1024 * 1024 };
 
@@ -16,7 +16,7 @@ var consumer = new Consumer(client, topics, options);
 var offset = new Offset(client);
 
 consumer.on('message', function (message) {
-  console.log(message);
+  console.log('message', message);
 });
 
 consumer.on('error', function (err) {
