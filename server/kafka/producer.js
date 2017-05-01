@@ -1,30 +1,26 @@
 'use strict';
 
-const kafka = require('kafka-node');
-const winston = require('winston');
-
+var kafka = require('kafka-node');
 var Producer = kafka.Producer;
 var KeyedMessage = kafka.KeyedMessage;
 var Client = kafka.Client;
-var client = new Client('zookeeper:2181');
-var argv = require('optimist').argv;
-var topic = argv.topic || 'topic-mitosis';
-var p = argv.p || 0;
-var a = argv.a || 0;
-var producer = new Producer(client, { requireAcks: 1 });
+var client = new Client('192.168.0.32:2181');
+var topic = 'topic-mitosis';
+
+var producer = new Producer(client, {requireAcks: 1});
 
 producer.on('ready', function () {
   var message = 'a message';
   var keyedMessage = new KeyedMessage('keyed', 'a keyed message');
 
   producer.send([
-    { topic: topic, partition: p, messages: [message, keyedMessage], attributes: a }
+    {topic: topic, partition: 0, messages: [message, keyedMessage]}
   ], function (err, result) {
-    winston.log(err || result);
+    console.log(err || result);
     process.exit();
   });
 });
 
 producer.on('error', function (err) {
-  winston.log('error', err);
+  console.log('error', err);
 });

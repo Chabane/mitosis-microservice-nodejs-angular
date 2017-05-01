@@ -10,10 +10,6 @@ const winston = require('winston');
 const app = express();
 const api = require('./routes/api');
 
-var kafkaConsumer = require('./kafka/consumer');
-var kafkaProducer = require('./kafka/producer');
-var kafkaOffset = require('./kafka/offset');
-
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(__dirname + '/../dist'));
@@ -26,17 +22,21 @@ app.use(morgan('dev'));
 
 winston.configure({
   transports: [
-    new (winston.transports.File)({ filename: 'mitosis-winston.log' })
+    new (winston.transports.File)({filename: 'mitosis-winston.log'})
   ]
 });
 
 const db = mongoose.connection;
-mongoose.connect('mongodb://mongo:27017/mitosis');
+mongoose.connect('mongodb://192.168.0.32:27017/mitosis');
 mongoose.Promise = global.Promise;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   winston.info('Connected to MongoDB');
+
+  const kafkaConsumer = require('./kafka/consumer');
+  const kafkaProducer = require('./kafka/producer');
+  const kafkaOffset = require('./kafka/offset');
 
   // all other routes are handled by Angular
   app.get('/*', function (req, res) {
