@@ -10,6 +10,8 @@ const winston = require('winston');
 const app = express();
 const api = require('./routes/api');
 
+const kafkaConsumer = require('./kafka/consumer');
+
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(__dirname + '/../dist'));
@@ -33,10 +35,6 @@ mongoose.Promise = global.Promise;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   winston.info('Connected to MongoDB');
-
-  const kafkaProducer = require('./kafka/producer');
-  const kafkaConsumerGroupMember = require('./kafka/consumerGroupMember');
-  const kafkaOffset = require('./kafka/offset');
 
   // all other routes are handled by Angular
   app.get('/*', function (req, res) {
