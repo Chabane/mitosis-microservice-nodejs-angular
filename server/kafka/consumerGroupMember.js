@@ -11,7 +11,7 @@ var consumerOptions = {
 
 var topics = ['topic-mitosis'];
 
-var consumerGroup = new ConsumerGroup(Object.assign({id: 'foo'}, consumerOptions), topics);
+var consumerGroup = new ConsumerGroup(Object.assign({id: 'mitosis-group'}, consumerOptions), topics);
 consumerGroup.on('error', onError);
 consumerGroup.on('message', onMessage);
 
