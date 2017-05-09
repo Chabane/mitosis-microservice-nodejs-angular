@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 # Install app dependencies
 COPY package.json /usr/src/app/
 COPY yarn.lock /usr/src/app/
-RUN yarn
+RUN yarn --ignore-optional
 
 # Bundle app source
 ADD dist /usr/src/app/dist/
