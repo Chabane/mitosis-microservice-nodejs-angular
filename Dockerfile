@@ -1,7 +1,9 @@
 FROM node:boron
 
 # Install bluetooth
-RUN apt-get install -y bluez bluetooth
+RUN apt-get update && apt-get install -y \
+  bluetooth \
+  bluez
 
 # Create app directory
 RUN mkdir -p /usr/src/app/dist
