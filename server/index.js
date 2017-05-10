@@ -27,6 +27,7 @@ app.get('/*', function (req, res) {
 require('./db/connect');
 require('./db/user');
 require('./kafka/consumer');
+require('./mip/');
 
 module.exports = app;
 
