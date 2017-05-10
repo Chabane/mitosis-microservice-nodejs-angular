@@ -16,6 +16,8 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 COPY yarn.lock /usr/src/app/
 RUN yarn --ignore-optional
+RUN yarn add bluetooth-hci-socket
+
 
 # Bundle app source
 ADD dist /usr/src/app/dist/
