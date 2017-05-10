@@ -3,7 +3,8 @@ FROM node:boron
 # Install bluetooth
 RUN apt-get update && apt-get install -y \
   bluetooth \
-  bluez
+  bluez \
+  usbutils
 
 # Create app directory
 RUN mkdir -p /usr/src/app/dist
