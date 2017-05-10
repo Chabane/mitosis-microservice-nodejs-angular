@@ -6,6 +6,13 @@ RUN apt-get update && apt-get install -y \
   bluez \
   usbutils
 
+RUN apt-get update
+RUN apt-get install gcc-4.8 g++-4.8
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 20
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.6 20
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50
+
 # Create app directory
 RUN mkdir -p /usr/src/app/dist
 RUN mkdir -p /usr/src/app/server
