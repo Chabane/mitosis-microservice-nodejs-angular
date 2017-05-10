@@ -1,5 +1,8 @@
 FROM node:boron
 
+# Install bluetooth
+RUN apt-get install -y bluez bluetooth
+
 # Create app directory
 RUN mkdir -p /usr/src/app/dist
 RUN mkdir -p /usr/src/app/server
