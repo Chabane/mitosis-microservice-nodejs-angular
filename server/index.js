@@ -19,6 +19,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(morgan('dev'));
 app.use('/api', api);
 
+// all other routes are handled by Angular
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '/../dist/index.html'));
+});
+
 require('./db/connect');
 require('./db/user');
 //require('./kafka/consumer');
