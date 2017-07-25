@@ -1,15 +1,8 @@
 {
-  "name": "nodejs-app",
+  "name": "nodejs-express-mongodb-kafka-graphql-app",
   "version": "1.0.0-alpha.2",
   "license": "Apache-2.0",
-  "scripts": {
-    "clear:client": "cd client && rimraf public && cd ..",
-    "clear:server": "cd server && rimraf public && cd ..",
-    "build:client": "cd client && npm run build && cd ..",
-    "start:server": "cd server && nodemon src/index.js",
-    "copy:public": "copyfiles -u 1 client/public/* server",
-    "start": "npm run clear:client && npm run clear:server && npm run build:client && npm run copy:public && npm run start:server"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NirbyApp/mitosis-microservice-nodejs-angular.git"
@@ -25,10 +18,25 @@
   },
   "private": false,
   "dependencies": {
+    "body-parser": "1.16.1",
+    "express": "4.14.1",
+    "express-graphql": "^0.6.6",
+    "express-static": "^1.2.4",
+    "graphql": "^0.10.1",
+    "kafka-node": "^1.6.0",
+    "mongoose": "4.8.5",
+    "morgan": "1.8.1",
+    "winston": "2.3.1"
   },
   "devDependencies": {
-    "copy": "^0.3.0",
-    "copyfiles": "^1.2.0",
-    "rimraf": "^2.6.1"
+    "@types/node": "~6.0.60",
+    "codelyzer": "~3.1.0",
+    "nodemon": "1.11.0",
+    "sinon": "2.2.0",
+    "tap-spec": "4.1.1",
+    "tape": "4.6.3",
+    "ts-node": "~3.2.0",
+    "tslint": "~5.3.2",
+    "typescript": "~2.3.3"
   }
 }

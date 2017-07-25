@@ -1,0 +1,10 @@
+<div>{{ name$ | async }}</div>
+<div>{{ ticketPrice$ | async }}</div>
+<div>
+  <mi-counter
+    [count]="numTickets$ | async"
+    (increment)=addTicket()
+    (decrement)=removeTicket()>
+  </mi-counter>
+</div>
+<div>${{ subTotal$ | async }}
