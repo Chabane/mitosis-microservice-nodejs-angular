@@ -1,6 +1,4 @@
-'use strict';
-
-var mongoose = require('mongoose');
+import { mongoose } from 'mongoose';
 
 var Schema = mongoose.Schema;
 

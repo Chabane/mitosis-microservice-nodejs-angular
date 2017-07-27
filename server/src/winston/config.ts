@@ -1,6 +1,4 @@
-'use strict';
-
-const winston = require('winston');
+import * as winston from 'winston';
 
 winston.configure({
   transports: [
@@ -8,4 +6,4 @@ winston.configure({
   ]
 });
 
-module.exports = winston;
+export default winston;

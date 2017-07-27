@@ -1,6 +1,5 @@
-'use strict';
+import { kafka } from 'kafka-node';
 
-var kafka = require('kafka-node');
 var Producer = kafka.Producer;
 var KeyedMessage = kafka.KeyedMessage;
 var Client = kafka.Client;
@@ -24,3 +23,5 @@ producer.on('ready', function () {
 producer.on('error', function (err) {
   console.log('error', err);
 });
+
+export default producer;

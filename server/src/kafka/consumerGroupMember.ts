@@ -1,5 +1,5 @@
-var async = require('async');
-var ConsumerGroup = require('kafka-node').ConsumerGroup;
+import * as async from 'async';
+import { ConsumerGroup } from 'kafka-node';
 
 var consumerOptions = {
   host: 'zookeeper:2181',
