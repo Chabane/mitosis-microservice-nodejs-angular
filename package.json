@@ -4,11 +4,12 @@
   "license": "Apache-2.0",
   "scripts": {
     "clear:client": "cd client && rimraf public && cd ..",
-    "clear:server": "cd server && rimraf public && cd ..",
+    "clear:server": "cd server && rimraf public dist && cd ..",
     "build:client": "cd client && npm run build && cd ..",
-    "start:server": "cd server && nodemon src/index.js",
-    "copy:public": "copyfiles -u 1 client/public/* server",
-    "start": "npm run clear:client && npm run clear:server && npm run build:client && npm run copy:public && npm run start:server"
+    "build:server": "cd server && npm run build && cd ..",
+    "start:server": "cd server && nodemon dist/index.js",
+    "copy:public": "copyfiles -u 1 client/public/* server/dist",
+    "start": "npm run clear:client && npm run clear:server && npm run build:client && npm run build:server && npm run copy:public && npm run start:server"
   },
   "repository": {
     "type": "git",
