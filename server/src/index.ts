@@ -31,10 +31,10 @@ app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
 }));
 
-app.use('/', express.static('public'));
+app.use('/', express.static(path.join(__dirname, 'public')));
 // all other routes are handled by Angular
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.set('port', (process.env.PORT || 4000));
