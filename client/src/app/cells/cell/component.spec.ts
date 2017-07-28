@@ -46,55 +46,55 @@ describe('CellComponent', () => {
         name => expect(name).toEqual('Wilbert'));
   }));
 
-  it('select ticket price data from the substore', async(() => {
+  it('select size price data from the substore', async(() => {
     const mockSubStore = MockNgRedux.getSubStore(
       ['WALLABIES', 'items', 'id1']);
 
-    const selectorStub = mockSubStore.getSelectorStub('ticketPrice');
+    const selectorStub = mockSubStore.getSelectorStub('color');
     selectorStub.next(2);
     selectorStub.complete();
 
-    cellComponent.ticketPrice$
+    cellComponent.color$
       .subscribe(
-        ticketPrice => expect(ticketPrice).toEqual(2));
+        color => expect(color).toEqual(2));
   }));
 
-  it('select ticket quantity data from the substore', async(() => {
+  it('select size quantity data from the substore', async(() => {
     const mockSubStore = MockNgRedux.getSubStore(
       ['WALLABIES', 'items', 'id1']);
 
-    const selectorStub = mockSubStore.getSelectorStub('tickets');
+    const selectorStub = mockSubStore.getSelectorStub('size');
     selectorStub.next(4);
     selectorStub.complete();
 
-    cellComponent.numTickets$
+    cellComponent.numSizes$
       .subscribe(
-        numTickets => expect(numTickets).toEqual(4));
+        numSizes => expect(numSizes).toEqual(4));
   }));
 
-  it('should use reasonable defaults if ticket price is missing', async(() => {
-    cellComponent.ticketPrice$
+  it('should use reasonable defaults if size price is missing', async(() => {
+    cellComponent.color$
       .subscribe(
-        ticketPrice => expect(ticketPrice).toEqual(0));
+        color => expect(color).toEqual(0));
   }));
 
-  it('should use reasonable defaults if ticket quantity is missing', async(() => {
-    cellComponent.numTickets$
+  it('should use reasonable defaults if size quantity is missing', async(() => {
+    cellComponent.numSizes$
       .subscribe(
-        numTickets => expect(numTickets).toEqual(0));
+        numSizes => expect(numSizes).toEqual(0));
   }));
 
-  it('should compute the subtotal as the ticket quantity changes', async(() => {
+  it('should compute the subtotal as the size quantity changes', async(() => {
     const mockSubStore = MockNgRedux.getSubStore(
       ['WALLABIES', 'items', 'id1']);
 
-    const priceStub = mockSubStore.getSelectorStub('ticketPrice');
+    const priceStub = mockSubStore.getSelectorStub('color');
     priceStub.next(1);
     priceStub.next(2);
     priceStub.next(3);
     priceStub.complete();
 
-    const quantityStub = mockSubStore.getSelectorStub('tickets');
+    const quantityStub = mockSubStore.getSelectorStub('size');
     quantityStub.next(5);
     quantityStub.complete();
 

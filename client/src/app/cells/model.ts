@@ -10,8 +10,8 @@ export interface ICell {
   id: string;
   cellType: CellType;
   name: string;
-  ticketPrice: number;
-  tickets: number;
+  color: string;
+  size: number;
 }
 
 export interface ICellList {
@@ -24,6 +24,6 @@ export const fromServer = (record: any): ICell => ({
   id: record.name.toLowerCase(),
   cellType: record.cellType,
   name: record.name,
-  ticketPrice: record.ticketPrice || 0,
-  tickets: record.tickets || 0,
+  color: record.color || 0,
+  size: record.size || 0,
 });

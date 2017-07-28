@@ -5,9 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { cellComponentReducer } from './reducers';
 import { ICell } from '../model';
 
-export const toSubTotal = (obs$: Observable<ICell>): Observable<number> =>
-  obs$.map(s => s.ticketPrice * s.tickets);
-
 /**
  * Fractal component example.
  */
@@ -22,21 +19,20 @@ export const toSubTotal = (obs$: Observable<ICell>): Observable<number> =>
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CellComponent {
-  static readonly ADD_TICKET = 'ADD_TICKET';
-  static readonly REMOVE_TICKET = 'REMOVE_TICKET';
+  static readonly ADD_SIZE = 'ADD_SIZE';
+  static readonly REMOVE_SIZE = 'REMOVE_SIZE';
 
   @Input() key: string;
   @Input() cellType: string;
 
-  @select()                  readonly name$: Observable<string>;
-  @select('tickets')         readonly numTickets$: Observable<number>;
-  @select('ticketPrice')     readonly ticketPrice$: Observable<number>;
-  @select$(null, toSubTotal) readonly subTotal$: Observable<number>;
+  @select() readonly name$: Observable<string>;
+  @select('size') readonly numSizes$: Observable<number>;
+  @select('color') readonly color$: Observable<number>;
 
   getBasePath = () => this.key ?
-    [ this.cellType, 'items', this.key ] :
+    [this.cellType, 'items', this.key] :
     null;
 
-  @dispatch() addTicket = () => ({ type: 'ADD_TICKET' });
-  @dispatch() removeTicket = () => ({ type: 'REMOVE_TICKET' });
+  @dispatch() addSize = () => ({ type: 'ADD_SIZE' });
+  @dispatch() removeSize = () => ({ type: 'REMOVE_SIZE' });
 }
