@@ -1,8 +1,9 @@
 import { Cell } from '../../db';
 export const resolvers = {
   Query: {
-    cells() {
-      return Cell.find;
+    async cells() {
+      const cells = await Cell.find({}).exec();
+      return cells;
     },
   },
   Mutation: {
