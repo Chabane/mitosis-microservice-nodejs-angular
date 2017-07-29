@@ -1,2 +1,2 @@
-export * from './connect';
-export * from './cell';
+export * from './config/database';
+export * from './models/cell';

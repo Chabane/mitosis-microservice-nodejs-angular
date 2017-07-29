@@ -28,7 +28,7 @@ app.use('/gql', graphqlExpress({
 }));
 
 app.use('/graphiql', graphiqlExpress({
-  endpointURL: '/graphql',
+  endpointURL: '/gql',
 }));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
