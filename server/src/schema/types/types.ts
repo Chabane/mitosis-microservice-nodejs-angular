@@ -7,7 +7,7 @@ enum CellType {
 
 type Cell {
    id: ID
-   cellType: CellType
+   type: CellType
    name: String
    color: String
    size: Int 
@@ -15,20 +15,12 @@ type Cell {
 
 # the schema allows the following query:
 type Query {
-  cells: [Cell]
-}
-
-# this schema allows the following mutation:
-type Mutation {
-  upCell (
-    id: ID!
-  ): Cell
+  cellsByType(type: CellType!): [Cell]
 }
 
 # we need to tell the server which types represent the root query
 # and root mutation types. We call them RootQuery and RootMutation by convention.
 schema {
   query: Query
-  mutation: Mutation
 }
 `

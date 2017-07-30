@@ -8,31 +8,43 @@ export enum CellType {
 
 export interface ICell extends Document {
   name: string;
-  cellType: CellType;
+  type: CellType;
   color: string;
   size: number;
 }
 
 export interface ICellModel extends Model<ICell> {
-    findAll(): Promise<ICell>
+  findByType(type: CellType): Promise<Array<ICell>>
 }
 
 // create a schema
 const schema = new Schema({
   name: String,
-  cellType: {
+  type: {
     type: String,
-    enum: ['EUCARYOTE', 'PROCARYOTE']
+    enum: [CellType.EUCARYOTE, CellType.PROCARYOTE]
   },
   color: String,
   size: Number
 });
 
-schema.static("findAll", () => {
-    return Cell
-        .find({})
-        .lean()
-        .exec();
+schema.static("findByType", (cellType: CellType) => {
+  return Cell
+    .find({ 'type': cellType.toString() })
+    .exec();
 });
 
 export const Cell = mongoose.model<ICell>("Cell", schema) as ICellModel;
+
+/*// create a new user called chris
+var user = new Cell({
+  name: 'Nirby',
+  type: CellType.PROCARYOTE
+});
+
+// call the built-in save method to save to the database
+user.save(function (err) {
+  if (err) throw err;
+
+  console.log('User saved successfully!');
+});*/

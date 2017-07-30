@@ -1,13 +1,10 @@
-import { Cell } from '../../db';
+import { Cell, CellType } from '../../db';
 export const resolvers = {
   Query: {
-    async cells() {
-      const cells = await Cell.find({}).exec();
+    async cellsByType(_, { type }) {
+      const cells = await Cell.findByType(<CellType>type);
       return cells;
     },
-  },
-  Mutation: {
-
   }
 };
 
