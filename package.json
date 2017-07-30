@@ -29,6 +29,7 @@
   },
   "private": false,
   "dependencies": {
+    "@types/kafka-node": "^2.0.1"
   },
   "devDependencies": {
     "copy": "^0.3.0",

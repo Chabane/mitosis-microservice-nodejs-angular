@@ -1,39 +1,46 @@
-'use strict';
+import { Consumer, Offset, Client } from 'kafka-node';
 
-var kafka = require('kafka-node');
-var Consumer = kafka.Consumer;
-var Offset = kafka.Offset;
-var Client = kafka.Client;
-var topic = 'topic-mitosis';
+export class KafkaConsumer {
 
-var client = new Client('zookeeper:2181');
-var topics = [
-  {topic: topic, partition: 0}
-];
+  consumer: Consumer;
+  offset: Offset;
 
-var options = { autoCommit: false, fetchMaxWaitMs: 1000, fetchMaxBytes: 1024 * 1024 };
+  constructor() {
+    const topic = 'topic-mitosis';
 
-var consumer = new Consumer(client, topics, options);
-var offset = new Offset(client);
+    const client = new Client('192.168.1.108:2181');
+    const topics = [
+      { topic: topic, partition: 0 }
+    ];
 
-consumer.on('message', function (message) {
-  console.log('message', message);
-});
+    const options = { autoCommit: false, fetchMaxWaitMs: 1000, fetchMaxBytes: 1024 * 1024 };
 
-consumer.on('error', function (err) {
-  console.log('error', err);
-});
+    this.consumer = new Consumer(client, topics, options);
+    this.offset = new Offset(client);
+  }
 
-/*
- * If consumer get `offsetOutOfRange` event, fetch data from the smallest(oldest) offset
- */
-consumer.on('offsetOutOfRange', function (topic) {
-  topic.maxNum = 2;
-  offset.fetch([topic], function (err, offsets) {
-    if (err) {
-      return console.error(err);
-    }
-    var min = Math.min(offsets[topic.topic][topic.partition]);
-    consumer.setOffset(topic.topic, topic.partition, min);
-  });
-});
+  initilize() {
+
+    /*
+     * If consumer get `offsetOutOfRange` event, fetch data from the smallest(oldest) offset
+     */
+    this.consumer.on('offsetOutOfRange', function (topic) {
+      topic.maxNum = 2;
+      this.offset.fetch([topic], function (err, offsets) {
+        if (err) {
+          return console.error(err);
+        }
+        var min = Math.min(offsets[topic.topic][topic.partition]);
+        this.consumer.setOffset(topic.topic, topic.partition, min);
+      });
+    });
+
+    this.consumer.on('message', function (message) {
+      console.log('message', message);
+    });
+
+    this.consumer.on('error', function (err) {
+      console.log('error', err);
+    });
+  }
+}

@@ -7,7 +7,7 @@ import * as bodyParser  from 'body-parser';
 import * as winston   from 'winston';
 import { serveStatic } from 'serve-static';
 
-import * as kafka  from './kafka';
+import { KafkaConsumer } from './kafka';
 import * as db from './db';
 import { typeDefs, resolvers } from './schema';
 
@@ -41,6 +41,9 @@ app.set('port', (process.env.PORT || 4000));
 app.listen(app.get('port'), function () {
   winston.info('Mitosis NodeJS App listening on port ' + app.get('port'));
 });
+
+const consumer = new KafkaConsumer();
+consumer.initilize();
 
 export = app;
 

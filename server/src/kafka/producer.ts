@@ -1,16 +1,16 @@
-import { kafka } from 'kafka-node';
+import * as kafka from 'kafka-node';
 
-var Producer = kafka.Producer;
-var KeyedMessage = kafka.KeyedMessage;
-var Client = kafka.Client;
-var client = new Client('zookeeper:2181');
-var topic = 'topic-mitosis';
+const Producer = kafka.Producer;
+const KeyedMessage = kafka.KeyedMessage;
+const Client = kafka.Client;
+const client = new Client('zookeeper:2181');
+const topic = 'topic-mitosis';
 
-var producer = new Producer(client, {requireAcks: 1});
+const producer = new Producer(client, {requireAcks: 1});
 
 producer.on('ready', function () {
-  var message = 'a message';
-  var keyedMessage = new KeyedMessage('keyed', 'a keyed message');
+  let message = 'a message';
+  let keyedMessage = new KeyedMessage('keyed', 'a keyed message');
 
   producer.send([
     {topic: topic, partition: 1, messages: [message, keyedMessage]}

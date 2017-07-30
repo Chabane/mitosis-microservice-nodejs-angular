@@ -1,7 +1,7 @@
 import * as async from 'async';
-import { ConsumerGroup } from 'kafka-node';
+import { ConsumerGroup, ConsumerGroupOptions } from 'kafka-node';
 
-var consumerOptions = {
+const consumerOptions = {
   host: 'zookeeper:2181',
   groupId: 'mitosis',
   sessionTimeout: 15000,
@@ -9,9 +9,11 @@ var consumerOptions = {
   fromOffset: 'earliest' // equivalent of auto.offset.reset valid values are 'none', 'latest', 'earliest'
 };
 
-var topics = ['topic-mitosis'];
+const topics = ['topic-mitosis'];
 
-var consumerGroup = new ConsumerGroup(Object.assign({id: 'mitosis-group'}, consumerOptions), topics);
+const options = Object.assign({id: 'mitosis-group'}, consumerOptions) as ConsumerGroupOptions; 
+
+const consumerGroup = new ConsumerGroup(options, topics);
 consumerGroup.on('error', onError);
 consumerGroup.on('message', onMessage);
 

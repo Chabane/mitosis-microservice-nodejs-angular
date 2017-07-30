@@ -1,10 +1,7 @@
-'use strict';
+import { Client, Offset, OffsetCommitRequest } from 'kafka-node';
 
-var kafka = require('kafka-node');
-var Client = kafka.Client;
-var Offset = kafka.Offset;
-var offset = new Offset(new Client());
-var topic = 'topic-mitosis';
+const offset = new Offset(new Client(""));
+const topic = 'topic-mitosis';
 
 // Fetch available offsets
 offset.fetch([
@@ -13,9 +10,9 @@ offset.fetch([
   console.log(err || offsets);
 });
 
+const offsetCommitRequest = [{ topic: topic, partition: 1 }] as OffsetCommitRequest[];
+
 // Fetch commited offset
-offset.commit('kafka-node-group', [
-  { topic: topic, partition: 1 }
-], function (err, result) {
+offset.commit('kafka-node-group', offsetCommitRequest, function (err, result) {
   console.log(err || result);
 });

@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/kafka-node@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@types/kafka-node/-/kafka-node-2.0.1.tgz#f218d5c6b165f37f7704df9609ab080686202a30"
+
 ansi-green@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ansi-green/-/ansi-green-0.1.1.tgz#8a5d9a979e458d57c40e33580b37390b8e10d0f7"
