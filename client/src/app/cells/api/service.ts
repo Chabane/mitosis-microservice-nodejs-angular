@@ -1,23 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Apollo, ApolloQueryObservable } from 'apollo-angular';
+import gql from 'graphql-tag';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
-import { CELL_TYPES, CellType, ICell, fromServer } from '../model';
+import { CellType, ICell, fromServer } from '../model';
 
-// A fake API on the internets.
-const URLS = {
-  [CELL_TYPES.PROCARYOTE]: 'http://www.mocky.io/v2/59200c34110000ce1a07b598',
-  [CELL_TYPES.EUCARYOTE]: 'http://www.mocky.io/v2/5920141a25000023015998f2',
-};
+// We use the gql tag to parse our query string into a query document
+const GetCellByTypes = gql`
+  query GetCellByTypes($type:CellType!) {
+    cellsByType(type:$type) {
+      id
+      name
+      type
+      color
+      size
+    }
+  }
+`;
 
 @Injectable()
 export class CellAPIService {
-  constructor(private http: Http) {}
+  constructor(private apollo: Apollo) {
+  }
 
-  getAll = (cellType: CellType): Observable<ICell[]> =>
-    this.http.get(URLS[cellType])
-      .map(resp => resp.json())
-      .map(records => records.map(fromServer));
+  getAll(type: CellType) : ApolloQueryObservable<Array<ICell>>{
+    return this.apollo.watchQuery({
+      query: GetCellByTypes,
+      variables: {
+        type: type
+      }
+    });
+  }
 }

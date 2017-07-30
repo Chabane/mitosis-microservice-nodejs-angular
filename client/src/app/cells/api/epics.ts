@@ -39,7 +39,7 @@ export class CellAPIEpics {
       .filter(action => actionIsForCorrectCellType(cellType)(action))
       .filter(() => cellsNotAlreadyFetched(cellType, store.getState()))
       .switchMap(() => this.service.getAll(cellType)
-        .map(data => this.actions.loadSucceeded(cellType, data))
+        .map(response => this.actions.loadSucceeded(cellType, response.data))
         .catch(response => of(this.actions.loadFailed(cellType, {
           status: '' + response.status,
         })))

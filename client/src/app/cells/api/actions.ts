@@ -4,7 +4,7 @@ import { FluxStandardAction } from 'flux-standard-action';
 import { ICell, CellType } from '../model';
 
 // Flux-standard-action gives us stronger typing of our actions.
-type Payload = ICell[];
+type Payload = Array<ICell>;
 interface MetaData { cellType: CellType; };
 export type CellAPIAction = FluxStandardAction<Payload, MetaData>;
 

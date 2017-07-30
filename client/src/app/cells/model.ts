@@ -1,7 +1,8 @@
 export const CELL_TYPES = {
-  EUCARYOTE: 'eucaryote',
-  PROCARYOTE: 'procaryote',
+  EUCARYOTE: 'EUCARYOTE',
+  PROCARYOTE: 'PROCARYOTE',
 };
+
 
 // TODO: is there a way to improve this?
 export type CellType = string;
