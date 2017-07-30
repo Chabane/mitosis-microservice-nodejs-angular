@@ -19,7 +19,7 @@ export const sortCells = (cellDictionary$: Observable<{}>) =>
 export class EucaryotePageComponent {
   // Get eucaryote-related data out of the Redux store as observables.
   @select$(['eucaryote', 'items'], sortCells)
-  readonly cells$: Observable<ICell[]>;
+  readonly cells$: Observable<Array<ICell>>;
 
   @select(['eucaryote', 'loading'])
   readonly loading$: Observable<boolean>;

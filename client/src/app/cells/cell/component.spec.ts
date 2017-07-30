@@ -97,10 +97,5 @@ describe('CellComponent', () => {
     const quantityStub = mockSubStore.getSelectorStub('size');
     quantityStub.next(5);
     quantityStub.complete();
-
-    cellComponent.subTotal$
-      .toArray()
-      .subscribe(
-        subTotals => expect(subTotals).toEqual([5, 10, 15]));
   }));
 });

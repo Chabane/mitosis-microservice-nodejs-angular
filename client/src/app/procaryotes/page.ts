@@ -19,7 +19,7 @@ export const sortCells = (cellDictionary$: Observable<{}>) =>
 export class ProcaryotePageComponent {
   // Get procaryote-related data out of the Redux store as observables.
   @select$(['procaryote', 'items'], sortCells)
-  readonly cells$: Observable<ICell[]>;
+  readonly cells$: Observable<Array<ICell>>;
 
   @select(['procaryote', 'loading'])
   readonly loading$: Observable<boolean>;

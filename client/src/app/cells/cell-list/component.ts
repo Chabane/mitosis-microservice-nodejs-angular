@@ -11,7 +11,7 @@ import { ICell } from '../model';
 export class CellListComponent {
   @Input() cellsName: string;
   @Input() cellType: string;
-  @Input() cells: Observable<ICell[]>;
+  @Input() cells: Observable<Array<ICell>>;
   @Input() loading: Observable<boolean>;
   @Input() error: Observable<any>;
 

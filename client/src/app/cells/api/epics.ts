@@ -27,7 +27,7 @@ export class CellAPIEpics {
   constructor(
     private service: CellAPIService,
     private actions: CellAPIActions,
-  ) {}
+  ) { }
 
   public createEpic(cellType: CellType) {
     return createEpicMiddleware(this.createLoadCellEpic(cellType));
@@ -39,7 +39,7 @@ export class CellAPIEpics {
       .filter(action => actionIsForCorrectCellType(cellType)(action))
       .filter(() => cellsNotAlreadyFetched(cellType, store.getState()))
       .switchMap(() => this.service.getAll(cellType)
-        .map(response => this.actions.loadSucceeded(cellType, response.data))
+        .map(response => this.actions.loadSucceeded(cellType, (<any>response.data).cellsByType))
         .catch(response => of(this.actions.loadFailed(cellType, {
           status: '' + response.status,
         })))
