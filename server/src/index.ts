@@ -43,7 +43,7 @@ app.listen(app.get('port'), function () {
 });
 
 const consumer = new KafkaConsumer();
-consumer.initilize();
+consumer.initialize();
 
 export = app;
 
