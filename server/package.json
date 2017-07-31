@@ -20,6 +20,7 @@
   },
   "private": false,
   "dependencies": {
+    "@types/graphql": "^0.10.1",
     "apollo-errors": "^1.4.0",
     "apollo-server-express": "^1.0.4",
     "body-parser": "^1.17.2",
@@ -32,6 +33,7 @@
     "mongoose": "^4.11.1",
     "morgan": "1.8.1",
     "path": "^0.12.7",
+    "subscriptions-transport-ws": "^0.8.2",
     "winston": "2.3.1"
   },
   "devDependencies": {

@@ -13,6 +13,10 @@ type Cell {
    size: Int 
 }
 
+type Subscription {
+  newCell(type: CellType!): Cell
+}
+
 # the schema allows the following query:
 type Query {
   cellsByType(type: CellType!): [Cell]

@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { NgReduxModule } from '@angular-redux/store';
 import { NgReduxRouterModule } from '@angular-redux/router';
-import { ApolloClient, createNetworkInterface } from 'apollo-client';
+import { ApolloClient } from 'apollo-client';
 import { ApolloModule } from 'apollo-angular';
 
 // This app's ngModules
@@ -18,17 +18,8 @@ import { FeedbackModule } from './feedback/module';
 // Top-level app component constructs.
 import { appRoutes } from './routes';
 import { AppComponent } from './component';
+import { provideClient } from './graphql';
 
-// by default, this client will send queries to `/graphql` (relative to the URL of your app)
-const client = new ApolloClient({
-  networkInterface: createNetworkInterface({
-    uri: '/gql'
-  }),
-});
-
-export function provideClient(): ApolloClient {
-  return client;
-}
 
 @NgModule({
   declarations: [AppComponent],
@@ -48,4 +39,4 @@ export function provideClient(): ApolloClient {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
