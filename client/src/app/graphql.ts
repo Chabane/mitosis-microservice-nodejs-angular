@@ -8,7 +8,7 @@ const networkInterface = createNetworkInterface({
 });
 
 // Create WebSocket client
-const wsClient = new SubscriptionClient(`ws://localhost:5000/`, {
+const wsClient = new SubscriptionClient(`ws://localhost:5000/gql-ws`, {
     reconnect: true,
     connectionParams: {
         // Pass any arguments you want for initialization

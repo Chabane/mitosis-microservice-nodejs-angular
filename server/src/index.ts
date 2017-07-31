@@ -60,7 +60,7 @@ export class Server {
     });
 
     // Bind it to port and start listening
-    websocketServer.listen(WS_PORT, () => winston.info("Listening on " + WS_PORT));
+    websocketServer.listen(WS_PORT, () => winston.info("Listening on port " + WS_PORT));
 
     const subscriptionServer = SubscriptionServer.create(
       {
