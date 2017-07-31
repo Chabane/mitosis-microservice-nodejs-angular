@@ -1,49 +1,59 @@
-import * as express from 'express';
+import * as express from "express";
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import * as path from 'path';
-import * as morgan  from 'morgan';
-import * as bodyParser  from 'body-parser';
-import * as winston   from 'winston';
+import * as morgan from 'morgan';
+import * as bodyParser from 'body-parser';
+import * as winston from 'winston';
 import { serveStatic } from 'serve-static';
 
 import { KafkaConsumer } from './kafka';
 import * as db from './db';
 import { typeDefs, resolvers } from './schema';
 
-const app = express();
+export class Server {
+  app: express.Application;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+  /**
+   * Bootstrap the application.
+   *
+   * @class Server
+   * @method bootstrap
+   * @static
+   * @return {ng.auto.IInjectorService} Returns the newly created injector for this app.
+   */
+  static bootstrap(): Server {
+    return new Server();
+  }
 
-app.use(morgan('dev'));
+  constructor() {
+    this.app = express();
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: false }));
 
-const executableSchema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
+    this.app.use(morgan('dev'));
 
-app.use('/gql', graphqlExpress({
-  schema: executableSchema
-}));
+    let executableSchema = makeExecutableSchema({
+      typeDefs,
+      resolvers,
+    });
 
-app.use('/graphiql', graphiqlExpress({
-  endpointURL: '/gql',
-}));
+    this.app.use('/gql', graphqlExpress({
+      schema: executableSchema
+    }));
 
-app.use('/', express.static(path.join(__dirname, 'public')));
-// all other routes are handled by Angular
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
-});
+    this.app.use('/graphiql', graphiqlExpress({
+      endpointURL: '/gql',
+    }));
 
-app.set('port', (process.env.PORT || 4000));
-app.listen(app.get('port'), function () {
-  winston.info('Mitosis NodeJS App listening on port ' + app.get('port'));
-});
+    this.app.use('/', express.static(path.join(__dirname, '../public')));
+    // all other routes are handled by Angular
+    this.app.get('/*', function (req, res) {
+      res.sendFile(path.join(__dirname, '../public/index.html'));
+    });
 
-const consumer = new KafkaConsumer();
-consumer.initialize();
-
-export = app;
+    let consumer = new KafkaConsumer();
+    consumer.initialize();
+  }
+}
 
