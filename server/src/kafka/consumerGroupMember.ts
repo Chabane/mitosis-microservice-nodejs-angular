@@ -3,6 +3,7 @@ import { ConsumerGroup, ConsumerGroupOptions } from 'kafka-node';
 
 export class KafkaConsumerGroupMember {
   consumerGroup: ConsumerGroup;
+
   constructor() {
     const consumerOptions = {
       host: 'zookeeper:2181',
@@ -13,16 +14,13 @@ export class KafkaConsumerGroupMember {
     };
 
     const topics = ['topic-mitosis'];
-
     const options = Object.assign({ id: 'mitosis-group' }, consumerOptions) as ConsumerGroupOptions;
-
     this.consumerGroup = new ConsumerGroup(options, topics);
   }
 
   initialize() {
     this.consumerGroup.on('error', this.onError);
     this.consumerGroup.on('message', this.onMessage);
-
     process.once('SIGINT', this.onSigInt);
   }
 
@@ -38,7 +36,7 @@ export class KafkaConsumerGroupMember {
   }
 
   onMessage(message) {
-    console.log('%s read msg Topic="%s" Partition=%s Offset=%d', this.client.clientId, message.topic, message.partition, message.offset);
+    console.log('read msg Topic="%s" Partition=%s Offset=%d', message.topic, message.partition, message.offset);
   }
 
 }

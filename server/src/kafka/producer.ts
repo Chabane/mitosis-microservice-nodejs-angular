@@ -1,27 +1,32 @@
-import * as kafka from 'kafka-node';
+import { Producer, KeyedMessage, Client } from 'kafka-node';
 
-const Producer = kafka.Producer;
-const KeyedMessage = kafka.KeyedMessage;
-const Client = kafka.Client;
-const client = new Client('zookeeper:2181');
-const topic = 'topic-mitosis';
+export class KafkaProducer {
 
-const producer = new Producer(client, {requireAcks: 1});
+  producer: Producer;
+  private topic = 'topic-mitosis';
 
-producer.on('ready', function () {
-  let message = 'a message';
-  let keyedMessage = new KeyedMessage('keyed', 'a keyed message');
+  constructor() {
+    const client = new Client('zookeeper:2181');
+    this.producer = new Producer(client, { requireAcks: 1 });
+  }
 
-  producer.send([
-    {topic: topic, partition: 1, messages: [message, keyedMessage]}
-  ], function (err, result) {
-    console.log(err || result);
-    process.exit();
-  });
-});
+  initialize() {
+    this.producer.on('ready', this.onReady);
+    this.producer.on('error', this.onError);
+  }
 
-producer.on('error', function (err) {
-  console.log('error', err);
-});
+  onReady() {
+    let message = 'a message';
+    let keyedMessage = new KeyedMessage('keyed', 'a keyed message');
+    this.producer.send([
+      { topic: this.topic, partition: 1, messages: [message, keyedMessage] }
+    ], function (err, result) {
+      console.log(err || result);
+      process.exit();
+    });
+  }
 
-export default producer;
+  onError(err) {
+    console.log('error', err);
+  }
+}
