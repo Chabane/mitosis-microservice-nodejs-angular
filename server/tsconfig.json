@@ -17,9 +17,5 @@
             "esnext.asynciterable",
             "dom"
         ]
-    },
-    "exclude": [
-        "node_modules",
-        "public"
-    ]
+    }
 }

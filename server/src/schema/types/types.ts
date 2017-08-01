@@ -26,5 +26,6 @@ type Query {
 # and root mutation types. We call them RootQuery and RootMutation by convention.
 schema {
   query: Query
+  subscription: Subscription
 }
 `

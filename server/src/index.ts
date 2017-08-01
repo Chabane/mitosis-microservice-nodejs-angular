@@ -12,8 +12,7 @@ import { execute, subscribe } from 'graphql';
 
 import { KafkaConsumer } from './kafka';
 import * as db from './db';
-import { typeDefs, resolvers } from './schema';
-
+import { typeDefs, resolvers, pubsub } from './schema';
 
 export class Server {
   app: express.Application;
@@ -38,8 +37,8 @@ export class Server {
     this.app.use(morgan('dev'));
 
     let executableSchema = makeExecutableSchema({
-      typeDefs,
-      resolvers,
+      typeDefs: typeDefs as any,
+      resolvers: resolvers as any
     });
 
     this.app.use('/gql', graphqlExpress({
