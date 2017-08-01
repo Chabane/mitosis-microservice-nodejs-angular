@@ -14,7 +14,8 @@ export interface ICell extends Document {
 }
 
 export interface ICellModel extends Model<ICell> {
-  findByType(type: CellType): Promise<Array<ICell>>
+  findByType(type: CellType): Promise<Array<ICell>>;
+  save(cell: ICell): Promise<ICell>;
 }
 
 // create a schema
@@ -30,8 +31,12 @@ const schema = new Schema({
 
 schema.static("findByType", (cellType: CellType) => {
   return Cell
-    .find({ 'type': cellType.toString() })
+    .find({ 'type': cellType })
     .exec();
+});
+
+schema.static("save", (newCell: ICell) => {
+  return Cell.create(newCell);
 });
 
 export const Cell = mongoose.model<ICell>("Cell", schema) as ICellModel;

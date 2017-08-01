@@ -1,5 +1,7 @@
 import { Consumer, Offset, Client } from 'kafka-node';
 import { pubsub } from '../schema';
+import { Cell, CellType, ICell } from '../db';
+
 import { info, error } from 'winston';
 
 export class KafkaConsumer {
@@ -41,7 +43,14 @@ export class KafkaConsumer {
     });
   }
 
-  onMessage(cell) {
+  async onMessage(result) {
+    let newCell = JSON.parse(result.value);
+    let cell = await Cell.save({
+      name: newCell.name,
+      color: newCell.color,
+      size: newCell.size,
+      type: <CellType> newCell.type
+    } as ICell);
     pubsub.publish('newCell', { newCell: cell });
   }
 
