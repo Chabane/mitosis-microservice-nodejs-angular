@@ -21,14 +21,34 @@ const GetCellByTypes = gql`
   }
 `;
 
+const GetNewCell = gql`
+        subscription GetnewCell($type:CellType!) {
+            newCell (type:$type) {
+              id
+              name
+              type
+              color
+              size
+            }
+        }`;
+
 @Injectable()
 export class CellAPIService {
   constructor(private apollo: Apollo) {
   }
 
-  getAll(type: CellType) : ApolloQueryObservable<Array<ICell>>{
+  getAll(type: CellType): ApolloQueryObservable<Array<ICell>> {
     return this.apollo.watchQuery({
       query: GetCellByTypes,
+      variables: {
+        type: type
+      }
+    });
+  }
+
+  getNewCell(type: CellType): Observable<ICell> {
+    return this.apollo.subscribe({
+      query: GetNewCell,
       variables: {
         type: type
       }
