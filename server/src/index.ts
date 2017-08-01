@@ -47,7 +47,7 @@ export class Server {
 
     this.app.use('/graphiql', graphiqlExpress({
       endpointURL: '/gql',
-      subscriptionsEndpoint: `ws://localhost:4000/subscriptions`
+      subscriptionsEndpoint: `ws://localhost:5000/gql-ws`
     }));
 
     const WS_PORT = 5000;
