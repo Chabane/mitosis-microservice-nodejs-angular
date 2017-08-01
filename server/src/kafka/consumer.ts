@@ -1,4 +1,6 @@
 import { Consumer, Offset, Client } from 'kafka-node';
+import { pubsub } from '../schema';
+import { info, error } from 'winston';
 
 export class KafkaConsumer {
 
@@ -32,18 +34,18 @@ export class KafkaConsumer {
     topic.maxNum = 2;
     this.offset.fetch([topic], function (err, offsets) {
       if (err) {
-        return console.error(err);
+        return error(err);
       }
       var min = Math.min(offsets[topic.topic][topic.partition]);
       this.consumer.setOffset(topic.topic, topic.partition, min);
     });
   }
 
-  onMessage(message) {
-    console.log('message', message);
+  onMessage(cell) {
+    pubsub.publish('newCell', { newCell: cell });
   }
 
   onError(err) {
-    console.log('error', err);
+    info('error', err);
   }
 }

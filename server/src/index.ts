@@ -12,7 +12,7 @@ import { execute, subscribe } from 'graphql';
 
 import { KafkaConsumer } from './kafka';
 import * as db from './db';
-import { typeDefs, resolvers, pubsub } from './schema';
+import { typeDefs, resolvers } from './schema';
 
 export class Server {
   app: express.Application;
