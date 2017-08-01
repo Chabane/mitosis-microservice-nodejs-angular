@@ -45,12 +45,7 @@ export class KafkaConsumer {
 
   async onMessage(result) {
     let newCell = JSON.parse(result.value);
-    let cell = await Cell.save({
-      name: newCell.name,
-      color: newCell.color,
-      size: newCell.size,
-      type: <CellType> newCell.type
-    } as ICell);
+    let cell = await Cell.save(newCell as ICell);
     pubsub.publish('newCell', { newCell: cell });
   }
 

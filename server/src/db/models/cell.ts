@@ -21,10 +21,7 @@ export interface ICellModel extends Model<ICell> {
 // create a schema
 const schema = new Schema({
   name: String,
-  type: {
-    type: String,
-    enum: [CellType.EUCARYOTE, CellType.PROCARYOTE]
-  },
+  type: String,
   color: String,
   size: Number
 });
