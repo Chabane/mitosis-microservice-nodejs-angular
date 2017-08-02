@@ -8,7 +8,7 @@ export type CellType = string;
 
 export interface ICell {
   id: string;
-  cellType: CellType;
+  type: CellType;
   name: string;
   color: string;
   size: number;
@@ -20,9 +20,15 @@ export interface ICellList {
   error: any;
 }
 
+export interface IMoreCell {
+  item: {};
+  loading: boolean;
+  error: any;
+}
+
 export const fromServer = (record: any): ICell => ({
   id: record.name.toLowerCase(),
-  cellType: record.cellType,
+  type: record.cellType,
   name: record.name,
   color: record.color || 0,
   size: record.size || 0,

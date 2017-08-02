@@ -11,13 +11,6 @@ import { CellType, ICell } from '../../model';
 import { SubscribeMoreCellsAPIAction, SubscribeMoreCellsAPIActions } from './actions';
 import { SubscribeMoreCellsAPIService } from './service';
 
-const cellsNotAlreadyFetched = (
-  cellType: CellType,
-  state: IAppState): boolean => !(
-    state[cellType] &&
-    state[cellType].items &&
-    Object.keys(state[cellType].items).length);
-
 const actionIsForCorrectCellType = (cellType: CellType) =>
   (action: SubscribeMoreCellsAPIAction): boolean =>
     action.meta.cellType === cellType;
@@ -37,9 +30,8 @@ export class SubscribeMoreCellsAPIEpics {
     return (action$, store) => action$
       .ofType(SubscribeMoreCellsAPIActions.SUBSCRIBE_MORE_CELLS)
       .filter(action => actionIsForCorrectCellType(cellType)(action))
-      .filter(() => cellsNotAlreadyFetched(cellType, store.getState()))
       .switchMap(() => this.service.getNewCell(cellType)
-        .map((response: any) => this.actions.loadSucceeded(cellType, response.data.newCell))
+        .map((response: any) => this.actions.loadSucceeded(cellType, response.newCell))
         .catch(response => of(this.actions.loadFailed(cellType, {
           status: '' + response.status,
         })))
