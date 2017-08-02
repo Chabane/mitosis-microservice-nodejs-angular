@@ -2,7 +2,7 @@
 <div>{{ color$ | async }}</div>
 <div>
   <mi-counter
-    [count]="numSizes$ | async"
+    [count]="size$ | async"
     (increment)=addSize()
     (decrement)=removeSize()>
   </mi-counter>

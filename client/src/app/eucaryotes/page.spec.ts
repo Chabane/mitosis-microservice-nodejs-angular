@@ -10,7 +10,7 @@ import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/do';
 
 import { EucaryotePageComponent } from './page';
-import { CellAPIActions } from '../cells/api/actions';
+import { GetCellsAPIActions } from '../cells/api/list/actions';
 import { CELL_TYPES } from '../cells/model';
 
 @Component({
@@ -29,7 +29,7 @@ describe('Eucaryote Page Container', () => {
     TestBed.configureTestingModule({
       declarations: [EucaryotePageComponent, MockCellListComponent],
       imports: [NgReduxTestingModule],
-      providers: [CellAPIActions],
+      providers: [GetCellsAPIActions],
     }).compileComponents();
 
     MockNgRedux.reset();
@@ -106,7 +106,7 @@ describe('Eucaryote Page Container', () => {
     const fixture = TestBed.createComponent(EucaryotePageComponent);
 
     expect(spy).toHaveBeenCalledWith({
-      type: CellAPIActions.LOAD_CELLS,
+      type: GetCellsAPIActions.LOAD_CELLS,
       meta: { cellType: CELL_TYPES.EUCARYOTE },
       payload: null,
     });

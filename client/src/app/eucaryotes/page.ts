@@ -3,7 +3,7 @@ import { select, select$ } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 import { pipe, values, sortBy, prop } from 'ramda';
 
-import { CellAPIActions } from '../cells/api/actions';
+import { GetCellsAPIActions } from '../cells/api/list/actions';
 import { CELL_TYPES, ICell } from '../cells/model';
 
 export const sortCells = (cellDictionary$: Observable<{}>) =>
@@ -27,7 +27,7 @@ export class EucaryotePageComponent {
   @select(['eucaryote', 'error'])
   readonly error$: Observable<any>;
 
-  constructor(actions: CellAPIActions) {
+  constructor(actions: GetCellsAPIActions) {
     actions.loadCells(CELL_TYPES.EUCARYOTE);
   }
 }

@@ -3,7 +3,6 @@ export const CELL_TYPES = {
   PROCARYOTE: 'PROCARYOTE',
 };
 
-
 // TODO: is there a way to improve this?
 export type CellType = string;
 

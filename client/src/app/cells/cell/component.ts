@@ -26,8 +26,8 @@ export class CellComponent {
   @Input() cellType: string;
 
   @select() readonly name$: Observable<string>;
-  @select('size') readonly numSizes$: Observable<number>;
-  @select('color') readonly color$: Observable<number>;
+  @select() readonly size$: Observable<number>;
+  @select() readonly color$: Observable<number>;
 
   getBasePath = () => this.key ?
     [this.cellType, 'items', this.key] :
