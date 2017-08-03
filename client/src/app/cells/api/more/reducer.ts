@@ -19,7 +19,7 @@ export function createSubscribeMoreCellAPIReducer(cellType: CellType) {
     if (!action.meta || action.meta.cellType !== cellType) {
       return state;
     }
-
+    
     switch (action.type) {
       case SubscribeMoreCellAPIActions.LOAD_STARTED:
         return {
@@ -31,7 +31,7 @@ export function createSubscribeMoreCellAPIReducer(cellType: CellType) {
       case SubscribeMoreCellAPIActions.LOAD_SUCCEEDED:
         return {
           ...state,
-          item: indexBy(prop('id'), action.payload),
+          item: action.payload,
           loading: false,
           error: null,
         };

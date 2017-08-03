@@ -11,9 +11,9 @@ export type SubscribeMoreCellAPIAction = FluxStandardAction<Payload, MetaData>;
 @Injectable()
 export class SubscribeMoreCellAPIActions {
   static readonly SUBSCRIBE_MORE_CELLS = 'SUBSCRIBE_MORE_CELLS';
-  static readonly LOAD_STARTED = 'LOAD_STARTED';
-  static readonly LOAD_SUCCEEDED = 'LOAD_SUCCEEDED';
-  static readonly LOAD_FAILED = 'LOAD_FAILED';
+  static readonly LOAD_STARTED = 'LOAD_STARTED_SUBSCRIBE_MORE';
+  static readonly LOAD_SUCCEEDED = 'LOAD_SUCCEEDED_SUBSCRIBE_MORE';
+  static readonly LOAD_FAILED = 'LOAD_FAILED_SUBSCRIBE_MORE';
 
   @dispatch()
   subscribeMoreCell = (cellType: CellType): SubscribeMoreCellAPIAction => ({

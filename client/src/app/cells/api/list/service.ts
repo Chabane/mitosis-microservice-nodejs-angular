@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
-import { CellType, ICell, fromServer } from '../../model';
+import { CellType, ICell } from '../../model';
 
 // We use the gql tag to parse our query string into a query document
 const GetCellsByTypes = gql`

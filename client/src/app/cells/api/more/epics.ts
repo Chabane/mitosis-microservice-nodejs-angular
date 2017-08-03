@@ -27,7 +27,7 @@ export class SubscribeMoreCellAPIEpics {
   }
 
   private createSubscribeMoreCellEpic(cellType: CellType): Epic<SubscribeMoreCellAPIAction, IAppState> {
-    return (action$, store) => action$
+    return (action$) => action$
       .ofType(SubscribeMoreCellAPIActions.SUBSCRIBE_MORE_CELLS)
       .filter(action => actionIsForCorrectCellType(cellType)(action))
       .switchMap(() => this.service.getNewCell(cellType)

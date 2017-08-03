@@ -25,11 +25,3 @@ export interface IMoreCell {
   loading: boolean;
   error: any;
 }
-
-export const fromServer = (record: any): ICell => ({
-  id: record.name.toLowerCase(),
-  type: record.cellType,
-  name: record.name,
-  color: record.color || 0,
-  size: record.size || 0,
-});
