@@ -20,7 +20,7 @@ const GetNewCell = gql`
         }`;
 
 @Injectable()
-export class SubscribeMoreCellsAPIService {
+export class SubscribeMoreCellAPIService {
   constructor(private apollo: Apollo) {
   }
 

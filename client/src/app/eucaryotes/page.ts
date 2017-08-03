@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { pipe, values, sortBy, prop } from 'ramda';
 
 import { GetCellsAPIActions } from '../cells/api/list/actions';
-import { SubscribeMoreCellsAPIActions } from '../cells/api/more/actions';
+import { SubscribeMoreCellAPIActions } from '../cells/api/more/actions';
 import { CELL_TYPES, ICell } from '../cells/model';
 
 export const sortCells = (cellDictionary$: Observable<{}>) =>
@@ -33,8 +33,8 @@ export class EucaryotePageComponent {
   readonly error$: Observable<any>;
 
   constructor(getCellsAPIActions: GetCellsAPIActions,
-    subscribeMoreCellsAPIActions: SubscribeMoreCellsAPIActions) {
+    subscribeMoreCellAPIActions: SubscribeMoreCellAPIActions) {
     getCellsAPIActions.loadCells(CELL_TYPES.EUCARYOTE);
-    subscribeMoreCellsAPIActions.subscribeMoreCells(CELL_TYPES.EUCARYOTE);
+    subscribeMoreCellAPIActions.subscribeMoreCell(CELL_TYPES.EUCARYOTE);
   }
 }
