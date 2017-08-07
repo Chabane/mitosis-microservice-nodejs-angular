@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/concat';
 
 import { IAppState } from '../../../store/model';
 import { CellType } from '../../model';
@@ -34,6 +35,7 @@ export class GetCellsAPIEpics {
   }
 
   private createLoadCellEpic(cellType: CellType): Epic<GetCellsAPIAction, IAppState> {
+
     return (action$, store) => action$
       .ofType(GetCellsAPIActions.LOAD_CELLS)
       .filter(action => actionIsForCorrectCellType(cellType)(action))

@@ -13,12 +13,7 @@ export const resolvers = {
 
   Subscription: {
     newCell: {
-      subscribe: withFilter(
-        () => pubsub.asyncIterator('newCell'),
-        (payload, args) => {
-          return payload.newCell.type === args.type;
-        }
-      )
+      subscribe: pubsub.asyncIterator('newCell')
     }
   }
 };

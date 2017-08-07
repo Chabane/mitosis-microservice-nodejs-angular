@@ -3,7 +3,7 @@ import { composeReducers, defaultFormReducer } from '@angular-redux/form';
 import { routerReducer } from '@angular-redux/router';
 
 import { createGetCellsAPIReducer } from '../cells/api/list/reducer';
-import { createSubscribeMoreCellAPIReducer } from '../cells/api/more/reducer';
+import { createNewCellAPIReducer } from '../cells/api/more/reducer';
 import { CELL_TYPES } from '../cells/model';
 
 // Define the global store shape by combining our application's
@@ -13,6 +13,6 @@ export const rootReducer = composeReducers(
   combineReducers({
     procaryote: createGetCellsAPIReducer(CELL_TYPES.PROCARYOTE),
     eucaryote: createGetCellsAPIReducer(CELL_TYPES.EUCARYOTE),
-    more_eucaryote: createSubscribeMoreCellAPIReducer(CELL_TYPES.EUCARYOTE),
+    more: createNewCellAPIReducer(),
     router: routerReducer,
   }));

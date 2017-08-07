@@ -20,7 +20,7 @@ const GetCellsByTypes = gql`
     }
   }
 `;
-
+        
 @Injectable()
 export class GetCellsAPIService {
   constructor(private apollo: Apollo) {

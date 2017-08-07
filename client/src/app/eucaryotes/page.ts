@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { pipe, values, sortBy, prop } from 'ramda';
 
 import { GetCellsAPIActions } from '../cells/api/list/actions';
-import { SubscribeMoreCellAPIActions } from '../cells/api/more/actions';
 import { CELL_TYPES, ICell } from '../cells/model';
 
 export const sortCells = (cellDictionary$: Observable<{}>) =>
@@ -22,19 +21,13 @@ export class EucaryotePageComponent {
   @select$(['eucaryote', 'items'], sortCells)
   readonly cells$: Observable<Array<ICell>>;
 
-  // Get eucaryote-related data out of the Redux store as observables.
-  @select(['more_eucaryote', 'item'])
-  readonly cell$: Observable<ICell>;
-
-  @select(['eucaryote', 'more_eucaryote', 'loading'])
+  @select(['eucaryote', 'loading'])
   readonly loading$: Observable<boolean>;
 
-  @select(['eucaryote', 'more_eucaryote', 'error'])
+  @select(['eucaryote', 'error'])
   readonly error$: Observable<any>;
 
-  constructor(getCellsAPIActions: GetCellsAPIActions,
-    subscribeMoreCellAPIActions: SubscribeMoreCellAPIActions) {
+  constructor(getCellsAPIActions: GetCellsAPIActions) {
     getCellsAPIActions.loadCells(CELL_TYPES.EUCARYOTE);
-    subscribeMoreCellAPIActions.subscribeMoreCell(CELL_TYPES.EUCARYOTE);
   }
 }

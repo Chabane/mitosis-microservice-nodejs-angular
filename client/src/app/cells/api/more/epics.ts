@@ -5,36 +5,33 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/concat';
 
 import { IAppState } from '../../../store/model';
-import { CellType, ICell } from '../../model';
-import { SubscribeMoreCellAPIAction, SubscribeMoreCellAPIActions } from './actions';
-import { SubscribeMoreCellAPIService } from './service';
-
-const actionIsForCorrectCellType = (cellType: CellType) =>
-  (action: SubscribeMoreCellAPIAction): boolean =>
-    action.meta.cellType === cellType;
+import { CellType } from '../../model';
+import { NewCellAPIAction, NewCellAPIActions } from './actions';
+import { NewCellAPIService } from './service';
 
 @Injectable()
-export class SubscribeMoreCellAPIEpics {
+export class NewCellAPIEpics {
   constructor(
-    private service: SubscribeMoreCellAPIService,
-    private actions: SubscribeMoreCellAPIActions,
+    private service: NewCellAPIService,
+    private actions: NewCellAPIActions,
   ) { }
 
-  public createEpic(cellType: CellType) {
-    return createEpicMiddleware(this.createSubscribeMoreCellEpic(cellType));
+  public createEpic() {
+    return createEpicMiddleware(this.createLoadNewCellEpic());
   }
 
-  private createSubscribeMoreCellEpic(cellType: CellType): Epic<SubscribeMoreCellAPIAction, IAppState> {
-    return (action$) => action$
-      .ofType(SubscribeMoreCellAPIActions.SUBSCRIBE_MORE_CELLS)
-      .filter(action => actionIsForCorrectCellType(cellType)(action))
-      .switchMap(() => this.service.getNewCell(cellType)
-        .map((response: any) => this.actions.loadSucceeded(cellType, response.newCell))
-        .catch(response => of(this.actions.loadFailed(cellType, {
+  private createLoadNewCellEpic(): Epic<NewCellAPIAction, IAppState> {
+
+    return (action$, store) => action$
+      .ofType(NewCellAPIActions.LOAD_CELLS)
+      .switchMap(() => this.service.getNewCell()
+        .map((response: any) => this.actions.loadSucceeded(response.data.cellsByType))
+        .catch(response => of(this.actions.loadFailed({
           status: '' + response.status,
         })))
-        .startWith(this.actions.loadStarted(cellType)));
+        .startWith(this.actions.loadStarted()));
   }
 }

@@ -4,39 +4,39 @@ import { FluxStandardAction } from 'flux-standard-action';
 import { ICell, CellType } from '../../model';
 
 // Flux-standard-action gives us stronger typing of our actions.
-type Payload = ICell;
-interface MetaData { cellType: CellType; };
-export type SubscribeMoreCellAPIAction = FluxStandardAction<Payload, MetaData>;
+type Payload = Array<ICell>;
+interface MetaData { };
+export type NewCellAPIAction = FluxStandardAction<Payload, MetaData>;
 
 @Injectable()
-export class SubscribeMoreCellAPIActions {
-  static readonly SUBSCRIBE_MORE_CELLS = 'SUBSCRIBE_MORE_CELLS';
-  static readonly LOAD_STARTED = 'LOAD_STARTED_SUBSCRIBE_MORE';
-  static readonly LOAD_SUCCEEDED = 'LOAD_SUCCEEDED_SUBSCRIBE_MORE';
-  static readonly LOAD_FAILED = 'LOAD_FAILED_SUBSCRIBE_MORE';
+export class NewCellAPIActions {
+  static readonly LOAD_CELLS = 'LOAD_MORE_CELLS';
+  static readonly LOAD_STARTED = 'LOAD_MORE_STARTED';
+  static readonly LOAD_SUCCEEDED = 'LOAD_MORE_SUCCEEDED';
+  static readonly LOAD_FAILED = 'LOAD_MORE_FAILED';
 
   @dispatch()
-  subscribeMoreCell = (cellType: CellType): SubscribeMoreCellAPIAction => ({
-    type: SubscribeMoreCellAPIActions.SUBSCRIBE_MORE_CELLS,
-    meta: { cellType },
+  loadCells = (): NewCellAPIAction => ({
+    type: NewCellAPIActions.LOAD_CELLS,
+    meta: {},
     payload: null,
   });
 
-  loadStarted = (cellType: CellType): SubscribeMoreCellAPIAction => ({
-    type: SubscribeMoreCellAPIActions.LOAD_STARTED,
-    meta: { cellType },
+  loadStarted = (): NewCellAPIAction => ({
+    type: NewCellAPIActions.LOAD_STARTED,
+    meta: {},
     payload: null,
   })
 
-  loadSucceeded = (cellType: CellType, payload: Payload): SubscribeMoreCellAPIAction => ({
-    type: SubscribeMoreCellAPIActions.LOAD_SUCCEEDED,
-    meta: { cellType },
+  loadSucceeded = (payload: Payload): NewCellAPIAction => ({
+    type: NewCellAPIActions.LOAD_SUCCEEDED,
+    meta: {},
     payload,
   })
 
-  loadFailed = (cellType: CellType, error): SubscribeMoreCellAPIAction => ({
-    type: SubscribeMoreCellAPIActions.LOAD_FAILED,
-    meta: { cellType },
+  loadFailed = (error): NewCellAPIAction => ({
+    type: NewCellAPIActions.LOAD_FAILED,
+    meta: {},
     payload: null,
     error,
   })

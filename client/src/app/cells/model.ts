@@ -1,6 +1,6 @@
 export const CELL_TYPES = {
   EUCARYOTE: 'EUCARYOTE',
-  PROCARYOTE: 'PROCARYOTE',
+  PROCARYOTE: 'PROCARYOTE'
 };
 
 // TODO: is there a way to improve this?
@@ -16,12 +16,6 @@ export interface ICell {
 
 export interface ICellList {
   items: {};
-  loading: boolean;
-  error: any;
-}
-
-export interface IMoreCell {
-  item: {};
   loading: boolean;
   error: any;
 }

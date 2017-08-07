@@ -11,7 +11,6 @@ export type GetCellsAPIAction = FluxStandardAction<Payload, MetaData>;
 @Injectable()
 export class GetCellsAPIActions {
   static readonly LOAD_CELLS = 'LOAD_CELLS';
-  static readonly SUBSCRIBE_MORE_CELLS = 'SUBSCRIBE_MORE_CELLS';
   static readonly LOAD_STARTED = 'LOAD_STARTED';
   static readonly LOAD_SUCCEEDED = 'LOAD_SUCCEEDED';
   static readonly LOAD_FAILED = 'LOAD_FAILED';

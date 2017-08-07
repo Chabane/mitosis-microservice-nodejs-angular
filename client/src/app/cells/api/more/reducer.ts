@@ -1,44 +1,41 @@
-import { SubscribeMoreCellAPIAction, SubscribeMoreCellAPIActions } from './actions';
-import { IMoreCell, CellType } from '../../model';
+import { NewCellAPIAction, NewCellAPIActions } from './actions';
+import { ICellList, CellType } from '../../model';
 import { indexBy, prop } from 'ramda';
 import { Action } from 'redux';
 
-const INITIAL_STATE: IMoreCell = {
-  item: {},
+const INITIAL_STATE: ICellList = {
+  items: {},
   loading: false,
   error: null,
 };
 
 // A higher-order reducer: accepts an cell type and returns a reducer
 // that only responds to actions for that particular cell type.
-export function createSubscribeMoreCellAPIReducer(cellType: CellType) {
-  return function subscribeMoreCellReducer(state: IMoreCell = INITIAL_STATE,
-    a: Action): IMoreCell {
+export function createNewCellAPIReducer() {
+  return function cellReducer(state: ICellList = INITIAL_STATE,
+    a: Action): ICellList {
 
-    const action = a as SubscribeMoreCellAPIAction;
-    if (!action.meta || action.meta.cellType !== cellType) {
-      return state;
-    }
-    
+    const action = a as NewCellAPIAction;
+
     switch (action.type) {
-      case SubscribeMoreCellAPIActions.LOAD_STARTED:
+      case NewCellAPIActions.LOAD_STARTED:
         return {
           ...state,
-          item: {},
+          items: {},
           loading: true,
           error: null,
         };
-      case SubscribeMoreCellAPIActions.LOAD_SUCCEEDED:
+      case NewCellAPIActions.LOAD_SUCCEEDED:
         return {
           ...state,
-          item: action.payload,
+          items: action.payload,
           loading: false,
           error: null,
         };
-      case SubscribeMoreCellAPIActions.LOAD_FAILED:
+      case NewCellAPIActions.LOAD_FAILED:
         return {
           ...state,
-          item: {},
+          items: {},
           loading: false,
           error: action.error,
         };

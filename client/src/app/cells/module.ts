@@ -6,9 +6,9 @@ import { CellListComponent } from './cell-list/component';
 import { GetCellsAPIActions } from './api/list/actions';
 import { GetCellsAPIEpics } from './api/list/epics';
 import { GetCellsAPIService } from './api/list/service';
-import { SubscribeMoreCellAPIActions } from './api/more/actions';
-import { SubscribeMoreCellAPIEpics } from './api/more/epics';
-import { SubscribeMoreCellAPIService } from './api/more/service';
+import { NewCellAPIActions } from './api/more/actions';
+import { NewCellAPIEpics } from './api/more/epics';
+import { NewCellAPIService } from './api/more/service';
 import { StoreModule } from '../store/module';
 
 import { CellComponent } from './cell/component';
@@ -19,7 +19,7 @@ import { CellComponent } from './cell/component';
   imports: [CoreModule, StoreModule, CommonModule],
   providers: [
     GetCellsAPIActions, GetCellsAPIEpics, GetCellsAPIService,
-    SubscribeMoreCellAPIActions, SubscribeMoreCellAPIEpics, SubscribeMoreCellAPIService
+    NewCellAPIActions, NewCellAPIEpics, NewCellAPIService
   ],
 })
 export class CellModule { }

@@ -14,7 +14,7 @@ type Cell {
 }
 
 type Subscription {
-  newCell(type: CellType!): Cell
+  newCell: Cell
 }
 
 # the schema allows the following query:

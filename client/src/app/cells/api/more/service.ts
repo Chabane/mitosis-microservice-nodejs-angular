@@ -9,8 +9,8 @@ import 'rxjs/add/observable/of';
 import { CellType, ICell } from '../../model';
 
 const GetNewCell = gql`
-        subscription GetNewCell($type:CellType!) {
-            newCell (type:$type) {
+        subscription GetNewCell {
+            newCell {
               id
               name
               type
@@ -18,18 +18,16 @@ const GetNewCell = gql`
               size
             }
         }`;
-
+        
 @Injectable()
-export class SubscribeMoreCellAPIService {
+export class NewCellAPIService {
   constructor(private apollo: Apollo) {
   }
 
-  getNewCell(type: CellType): Observable<ICell> {
+  getNewCell(): Observable<ICell> {
     return this.apollo.subscribe({
       query: GetNewCell,
-      variables: {
-        type: type
-      }
+      variables: {}
     });
   }
 }
