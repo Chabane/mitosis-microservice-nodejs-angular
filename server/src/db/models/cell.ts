@@ -15,6 +15,7 @@ export interface ICell extends Document {
 
 export interface ICellModel extends Model<ICell> {
   findByType(type: CellType): Promise<Array<ICell>>;
+  findAll(): Promise<Array<ICell>>;
   save(cell: ICell): Promise<ICell>;
 }
 
@@ -32,21 +33,14 @@ schema.static("findByType", (cellType: CellType) => {
     .exec();
 });
 
+schema.static("findAll", () => {
+  return Cell
+    .find();
+});
+
 schema.static("save", (newCell: ICell) => {
   return Cell.create(newCell);
 });
 
 export const Cell = mongoose.model<ICell>("Cell", schema) as ICellModel;
 
-/*// create a new user called chris
-var user = new Cell({
-  name: 'Nirby',
-  type: CellType.PROCARYOTE
-});
-
-// call the built-in save method to save to the database
-user.save(function (err) {
-  if (err) throw err;
-
-  console.log('User saved successfully!');
-});*/

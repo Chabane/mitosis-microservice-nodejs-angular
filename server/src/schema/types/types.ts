@@ -19,7 +19,8 @@ type Subscription {
 
 # the schema allows the following query:
 type Query {
-  cellsByType(type: CellType!): [Cell]
+  cellsByType(type: CellType): [Cell]
+  cells: [Cell]
 }
 
 # we need to tell the server which types represent the root query

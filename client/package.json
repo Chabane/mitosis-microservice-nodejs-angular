@@ -1,5 +1,5 @@
 {
-  "name": "angular-redux-graphql-app",
+  "name": "angular-graphql-app",
   "version": "1.0.0-alpha.2",
   "license": "Apache-2.0",
   "scripts": {
@@ -13,9 +13,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-redux/form": "6.5.2",
-    "@angular-redux/router": "6.3.1",
-    "@angular-redux/store": "6.5.6",
     "@angular/animations": "^4.0.0",
     "@angular/cdk": "2.0.0-beta.8",
     "@angular/common": "^4.0.0",
@@ -33,9 +30,6 @@
     "flux-standard-action": "^1.2.0",
     "graphql": "^0.10.1",
     "ramda": "^0.23.0",
-    "redux": "3.6.0",
-    "redux-logger": "3.0.1",
-    "redux-observable": "0.14.1",
     "rxjs": "^5.4.1",
     "subscriptions-transport-ws": "^0.8.2",
     "zone.js": "^0.8.14"
@@ -48,7 +42,6 @@
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
-    "@types/redux-logger": "^3.0.0",
     "codelyzer": "~3.0.1",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
