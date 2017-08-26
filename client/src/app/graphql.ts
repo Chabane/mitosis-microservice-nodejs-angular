@@ -1,5 +1,4 @@
 import { ApolloClient, createNetworkInterface } from 'apollo-client';
-import { ApolloModule } from 'apollo-angular';
 import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws';
 
 // Create regular NetworkInterface by using apollo-client's API:
