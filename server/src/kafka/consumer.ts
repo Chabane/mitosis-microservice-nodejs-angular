@@ -12,7 +12,7 @@ export class KafkaConsumer {
   constructor() {
     let topic = 'topic-mitosis';
 
-    let client = new Client('192.168.0.32:2181');
+    let client = new Client('zookeeper:2181');
     let topics = [
       { topic: topic, partition: 0 }
     ];

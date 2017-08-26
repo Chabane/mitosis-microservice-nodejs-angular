@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === "testing") {
     mongoose.connect("mongodb://mitosis.org/TestingDB");
   });
 } else {
-  mongoose.connect('mongodb://192.168.0.32:27017/mitosis', { useMongoClient: true });
+  mongoose.connect('mongodb://mongo:27017/mitosis', { useMongoClient: true });
 }
 const db = mongoose.connection;
 
