@@ -30,9 +30,10 @@ export class CellListComponent {
         });
 
     // subscribing to the kafka producer
-    this.cellService.getNewCell().map((response: any) => {
-      let cell = response.data.newCell;
-      this.addCell(cell);
+    this.cellService.getNewCell()
+        .map((response: any) => response.newCell)
+        .subscribe(data => { 
+          this.addCell(data);
     });     
   }
 
