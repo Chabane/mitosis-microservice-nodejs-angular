@@ -17,7 +17,7 @@ export const resolvers = {
 
   Subscription: {
     newCell: {
-      subscribe: pubsub.asyncIterator('newCell')
+      subscribe: () => pubsub.asyncIterator('newCell')
     }
   }
 };
