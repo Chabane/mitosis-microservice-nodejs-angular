@@ -24,7 +24,7 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
-    "apollo-angular": "^0.13.0",
+    "apollo-angular": "0.13.0",
     "apollo-client": "^1.2.2",
     "core-js": "^2.4.1",
     "flux-standard-action": "^1.2.0",
