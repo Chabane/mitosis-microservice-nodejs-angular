@@ -9,6 +9,8 @@ node {
 
                             stage ('install') {
                                 sh 'yarn'
+                                sh 'cd client && yarn'
+                                sh 'cd server && yarn'
                             }
 
                             stage ('test') {
