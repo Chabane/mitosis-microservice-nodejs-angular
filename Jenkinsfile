@@ -17,6 +17,8 @@ node {
                             }
 
                             stage ('build') {
+                                sh 'npm run clear:client'
+                                sh 'npm run clear:server'
                                 sh 'npm run build:client-prod'
                                 sh 'npm run build:server'
                             }
