@@ -15,7 +15,8 @@ node {
                             }
 
                             stage ('build') {
-                                sh 'npm run build:prod'
+                                sh 'npm run build:client-prod'
+                                sh 'npm run build:server'
                             }
 
                             stage ('deploy'){
