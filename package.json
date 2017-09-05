@@ -12,7 +12,7 @@
     "start:server-prod": "cd server && node server.js",
     "copy:public": "copyfiles -u 1 client/public/* server/dist && rimraf client/public",
     "start:dev": "npm run clear:client && npm run clear:server && npm run build:client && npm run build:server && npm run copy:public && npm run start:server",
-    "start:prod": "npm run build:client-prod && npm run build:server && npm run copy:public && npm run start:server-prod"
+    "start:prod": "npm run clear:client && npm run clear:server && npm run build:client-prod && npm run build:server && npm run copy:public && npm run start:server-prod"
   },
   "repository": {
     "type": "git",
