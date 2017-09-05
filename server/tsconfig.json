@@ -2,6 +2,7 @@
     "compileOnSave": false,
     "compilerOptions": {
         "outDir": "./dist/",
+        "rootDir": "./src/",
         "sourceMap": true,
         "declaration": false,
         "allowJs": true,
@@ -16,6 +17,10 @@
             "es2016",
             "esnext.asynciterable",
             "dom"
+        ],
+        "exclude": [
+            "node_modules",
+            "dist"
         ]
     }
 }
