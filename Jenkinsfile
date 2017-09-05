@@ -3,11 +3,8 @@ node {
 
                             def retstat = sh(script: 'docker service inspect microservice-nodejs', returnStatus: true)
 
-                                echo env.MANAGER_IP
-                                echo '2${APP_NAME}'
-                                echo '3${ENV.APP_NAME}'
-                             def MANAGER_IP = env.MANAGER_IP
-                             def APP_NAME = env.APP_NAME
+                            def MANAGER_IP = env.MANAGER_IP
+                            def APP_NAME = env.APP_NAME
 
                             stage ('checkout') {
                                 git url : 'https://github.com/NirbyApp/mitosis-microservice-nodejs-angular.git'
