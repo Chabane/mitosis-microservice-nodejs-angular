@@ -4,6 +4,9 @@ node {
                             def retstat = sh(script: 'docker service inspect microservice-nodejs', returnStatus: true)
 
                             environment {
+                                echo '1${env.MANAGER_IP}'
+                                echo '2${APP_NAME}'
+                                echo '3${ENV.APP_NAME}'
                                 MANAGER_IP = "${env.MANAGER_IP}"
                                 APP_NAME = "${env.APP_NAME}"
                             }
